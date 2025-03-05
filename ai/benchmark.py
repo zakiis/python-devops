@@ -55,13 +55,12 @@ def main():
     error_count = 0
     error_types = defaultdict(int)
 
-     # 创建固定数量的请求
+    # 创建固定数量的请求
     with concurrent.futures.ThreadPoolExecutor(max_workers=CONCURRENCY) as executor:
-        # 提交固定数量的请求（示例设为1000）
+        # 提交固定数量的请求
         futures = [executor.submit(send_request) for _ in range(REQUEST_COUNT)]
         
         # 等待所有请求完成
-        
         for future in concurrent.futures.as_completed(futures):
             result = future.result()
             if not result:
